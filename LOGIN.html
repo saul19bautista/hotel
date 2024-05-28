@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Formulario Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="form-login">
+        <h5>Formulario Login</h5>
+        <form id="loginForm" action="procesar_formulario.php" method="post" onsubmit="return validarCredenciales();">
+            <input class="controls" name="usuario" value="" placeholder="Usuario">
+            <input class="controls" name="contraseña" type="password" placeholder="Contraseña">
+            <input class="buttons" type="submit" value="Ingresar">
+        </form>
+        <p><a href="#">¿Olvidaste tu contraseña?</a></p>
+    </section>
+    <div id="mensaje-bienvenida" style="display: none;">
+        ¡Bienvenido! Has iniciado sesión correctamente.
+    </div>
+    
+    <script>
+        function validarCredenciales() {
+            const usuarioInput = document.querySelector('input[name="usuario"]');
+            const contraseñaInput = document.querySelector('input[name="contraseña"]');
+            const usuario = usuarioInput.value;
+            const contraseña = contraseñaInput.value;
+
+            // Define el usuario y la contraseña permitidos
+            const usuarioPermitido = "Luz Arleth";
+            const contraseñaPermitida = "micontraseña";
+
+            if (usuario === usuarioPermitido && contraseña === contraseñaPermitida) {
+                document.querySelector('.form-login').style.display = 'none';
+                document.getElementById('mensaje-bienvenida').style.display = 'block';
+                setTimeout(function() {
+                    window.location.href = 'E8.html';
+                }, 2000);
+                return true; // Permitir que el formulario se envíe
+            } else {
+                alert("Credenciales incorrectas. Inténtalo de nuevo.");
+                usuarioInput.focus();
+                return false; // Evitar que el formulario se envíe
+            }
+        }
+    </script>
+</body>
+</html>
+
